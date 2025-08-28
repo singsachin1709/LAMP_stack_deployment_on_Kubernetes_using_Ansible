@@ -1,0 +1,17 @@
+- name: Build Apache+PHP image
+  community.docker.docker_image:
+    name: "apachephp"
+    tag: "latest"     
+    build:
+      path: "{{ role_path }}/files"
+      dockerfile: Dockerfile.apachephp
+    source: build
+
+- name: Build MySQL image
+  community.docker.docker_image:
+    name: "mysql-custom"
+    tag: "latest"     
+    build:
+      path: "{{ role_path }}/files"
+      dockerfile: Dockerfile.mysql
+    source: build

@@ -1,0 +1,30 @@
+- name: Create MySQL PersistentVolume
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/pv-mysql.yaml"
+
+- name: Create MySQL PersistentVolumeClaim
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/pvc-mysql.yaml"
+
+- name: Deploy MySQL
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/mysql-deployment.yaml"
+
+- name: Expose MySQL Service
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/mysql-service.yaml"
+
+- name: Deploy Apache+PHP
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/apachephp-deployment.yaml"
+
+- name: Expose Apache+PHP Service
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/apachephp-service.yaml"
+

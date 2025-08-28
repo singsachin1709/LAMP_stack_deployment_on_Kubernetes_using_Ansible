@@ -1,0 +1,14 @@
+FROM ubuntu:24.04
+
+# Install Apache and PHP
+RUN apt-get update && apt-get install -y \
+    apache2 php libapache2-mod-php php-mysql \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy index.php to web root (will add next step)
+COPY index.php /var/www/html/
+
+EXPOSE 80
+
+CMD ["apachectl", "-D", "FOREGROUND"]
+

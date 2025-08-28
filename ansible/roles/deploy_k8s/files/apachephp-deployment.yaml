@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apachephp
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: apachephp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apachephp
+    spec:
+      containers:
+      - name: apachephp
+        image: apachephp:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+          - name: DB_HOST
+            value: mysql # DNS or Service name of the Mysql Pod
+          - name: DB_USER
+            value: apache
+          - name: DB_PASSWORD
+            value: mypass
+          - name: DB_NAME
+            value: mydb
